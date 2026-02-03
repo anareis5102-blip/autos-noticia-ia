@@ -103,22 +103,39 @@ const App = () => {
               <p className="mb-6">
                 O papel do agente de Inteligência Artificial é atuar como uma camada de supervisão técnica incansável. Ao contrário da análise humana, que pode ser afetada pela fadiga ou volume de trabalho, a nossa IA analisa:
               </p>
-              <div className="grid md:grid-cols-3 gap-8">
+              <div className="space-y-3">
+  <div className="flex items-center gap-3">
+    <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold">
+      1
+    </div>
+    <h5 className="font-bold text-slate-800">Erros Formais</h5>
+  </div>
+  <p className="text-sm">
+    Identificação de omissões de datas, locais ou identificações obrigatórias segundo o Código de Processo Penal.
+  </p>
+</div>
                 <div className="space-y-3">
-                  <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold">1</div>
-                  <h5 className="font-bold text-slate-800">Erros Formais</h5>
-                  <p className="text-sm">Identificação de omissões de datas, locais ou identificações obrigatórias segundo o Código de Processo Penal.</p>
-                </div>
+  <div className="flex items-center gap-3">
+    <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold">
+      2
+    </div>
+    <h5 className="font-bold text-slate-800">Coerência Narrativa</h5>
+  </div>
+  <p className="text-sm">
+    Deteção de contradições lógicas na descrição dos factos que possam levar a impugnações futuras.
+  </p>
+</div>
                 <div className="space-y-3">
-                  <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold">2</div>
-                  <h5 className="font-bold text-slate-800">Coerência Narrativa</h5>
-                  <p className="text-sm">Deteção de contradições lógicas na descrição dos factos que possam levar a impugnações futuras.</p>
-                </div>
-                <div className="space-y-3">
-                  <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold">3</div>
-                  <h5 className="font-bold text-slate-800">Enquadramento</h5>
-                  <p className="text-sm">Sugestão de artigos legais pertinentes com base na descrição qualitativa do evento reportado.</p>
-                </div>
+  <div className="flex items-center gap-3">
+    <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center font-bold">
+      3
+    </div>
+    <h5 className="font-bold text-slate-800">Enquadramento</h5>
+  </div>
+  <p className="text-sm">
+    Sugestão de artigos legais pertinentes com base na descrição qualitativa do evento reportado.
+  </p>
+</div>
               </div>
             </div>
           </div>
