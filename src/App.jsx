@@ -97,101 +97,105 @@ const App = () => {
         </Section>
 
         {/* 4. Análise por IA */}
-        <Section title="Análise por IA" id="ia" icon={<BrainCircuit size={28} />}>
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-            <div className="p-8 md:p-12">
-              <p className="mb-6">
-                O papel do agente de Inteligência Artificial é atuar como uma camada de supervisão técnica incansável. Ao contrário da análise humana, que pode ser afetada pela fadiga ou volume de trabalho, a nossa IA analisa:
-              </p>
-              <div
-  style={{
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-    gap: '32px'
-  }}
->
-              <div>
-              <div style={{ marginBottom: '24px' }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-    <div
-      style={{
-        width: '40px',
-        height: '40px',
-        borderRadius: '50%',
-        backgroundColor: '#EFF6FF',
-        color: '#2563EB',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontWeight: 'bold'
-      }}
-    >
-      1
-    </div>
-    <h5 style={{ fontWeight: 'bold', color: '#1E293B', margin: 0 }}>
-      Erros Formais
-    </h5>
-  </div>
-  <p style={{ fontSize: '0.9rem', color: '#334155', marginTop: '8px' }}>
-    Identificação de omissões de datas, locais ou identificações obrigatórias segundo o Código de Processo Penal.
-  </p>
-<div>
-                <div style={{ marginBottom: '24px' }}>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-    <div
-      style={{
-        width: '40px',
-        height: '40px',
-        borderRadius: '50%',
-        backgroundColor: '#EFF6FF',
-        color: '#2563EB',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontWeight: 'bold'
-      }}
-    >
-      2
-    </div>
-    <h5 style={{ fontWeight: 'bold', color: '#1E293B', margin: 0 }}>
-      Coerência Narrativa
-    </h5>
-  </div>
-  <p style={{ fontSize: '0.9rem', color: '#334155', marginTop: '8px' }}>
-    Deteção de contradições lógicas na descrição dos factos que possam levar a impugnações futuras.
-  </p>
-</div>
-                <div>
-  <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-    <div
-      style={{
-        width: '40px',
-        height: '40px',
-        borderRadius: '50%',
-        backgroundColor: '#EFF6FF',
-        color: '#2563EB',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontWeight: 'bold'
-      }}
-    >
-      3
-    </div>
-    <h5 style={{ fontWeight: 'bold', color: '#1E293B', margin: 0 }}>
-      Enquadramento
-    </h5>
-  </div>
-  <p style={{ fontSize: '0.9rem', color: '#334155', marginTop: '8px' }}>
-    Sugestão de artigos legais pertinentes com base na descrição qualitativa do evento reportado.
-  </p>
-</div>
-</div>
-              </div>
-            </div>
-          </div>
-        </Section>
+<Section title="Análise por IA" id="ia" icon={<BrainCircuit size={28} />}>
+  <div style={{ background: '#fff', borderRadius: '16px', border: '1px solid #E2E8F0' }}>
+    <div style={{ padding: '32px' }}>
+      <p style={{ marginBottom: '24px', color: '#475569' }}>
+        O papel do agente de Inteligência Artificial é atuar como uma camada de supervisão técnica incansável.
+        Ao contrário da análise humana, que pode ser afetada pela fadiga ou volume de trabalho, a nossa IA analisa:
+      </p>
 
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+          gap: '32px'
+        }}
+      >
+        {/* Bloco 1 */}
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#EFF6FF',
+                color: '#2563EB',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold'
+              }}
+            >
+              1
+            </div>
+            <h5 style={{ margin: 0, fontWeight: 'bold', color: '#1E293B' }}>
+              Erros Formais
+            </h5>
+          </div>
+          <p style={{ marginTop: '8px', fontSize: '0.9rem', color: '#334155' }}>
+            Identificação de omissões de datas, locais ou identificações obrigatórias segundo o Código de Processo Penal.
+          </p>
+        </div>
+
+        {/* Bloco 2 */}
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#EFF6FF',
+                color: '#2563EB',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold'
+              }}
+            >
+              2
+            </div>
+            <h5 style={{ margin: 0, fontWeight: 'bold', color: '#1E293B' }}>
+              Coerência Narrativa
+            </h5>
+          </div>
+          <p style={{ marginTop: '8px', fontSize: '0.9rem', color: '#334155' }}>
+            Deteção de contradições lógicas na descrição dos factos que possam levar a impugnações futuras.
+          </p>
+        </div>
+
+        {/* Bloco 3 */}
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '50%',
+                backgroundColor: '#EFF6FF',
+                color: '#2563EB',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontWeight: 'bold'
+              }}
+            >
+              3
+            </div>
+            <h5 style={{ margin: 0, fontWeight: 'bold', color: '#1E293B' }}>
+              Enquadramento
+            </h5>
+          </div>
+          <p style={{ marginTop: '8px', fontSize: '0.9rem', color: '#334155' }}>
+            Sugestão de artigos legais pertinentes com base na descrição qualitativa do evento reportado.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</Section>
         {/* 5. Relatório de Análise */}
         <Section title="Relatório de Análise" id="relatorio" bg="bg-blue-50" icon={<FileText size={28} />}>
           <div className="flex flex-col md:flex-row items-center justify-between p-8 bg-white border border-slate-200 rounded-xl">
