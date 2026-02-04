@@ -43,9 +43,20 @@ const App = () => {
       </div>
 
       <div>
-                <h1 className="text-2xl md:text-4xl font-extrabold leading-tight">
-          Sistema de Análise de Autos de Notícia com Inteligência Artificial<br className="hidden md:block" />
-      </h1>
+               <h1 className="text-2xl md:text-4xl font-extrabold leading-tight">
+  Sistema de Análise de Autos de Notícia com Inteligência Artificial
+</h1>
+
+<p
+  style={{
+    marginTop: '8px',
+    fontSize: '0.95rem',
+    color: '#E0E7FF',
+    fontStyle: 'italic'
+  }}
+>
+  Conforme Artigo 46.º da Lei n.º 50/2006
+</p> 
       </div>
 
     </div>
