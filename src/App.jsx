@@ -213,9 +213,7 @@ const App = () => {
           </div>
         </Section>
 
-        {/* 6. Vídeo Explicativo */}
-        <Section title="Vídeo Explicativo" id="video" icon={<Video size={28} />}>
-  {/* 6. Vídeo Explicativo */}
+         {/* 6. Vídeo Explicativo */}
 <Section title="Vídeo Explicativo" id="video" icon={<Video size={28} />}>
   <a
     href="https://app.heygen.com/videos/5adc004b083f447a9794d1dd88405c5a"
