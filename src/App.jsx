@@ -214,7 +214,7 @@ const App = () => {
         </Section>
 
          {/* 6. Vídeo Explicativo */}
-<Section title="Vídeo Explicativo" id="video" icon={<Video size={28} />}>
+<Section id="video" title="Vídeo Explicativo" icon={<Video size={28} />}>
   <a
     href="https://app.heygen.com/videos/5adc004b083f447a9794d1dd88405c5a"
     target="_blank"
@@ -229,32 +229,20 @@ const App = () => {
       borderRadius: '16px',
       overflow: 'hidden',
       border: '1px solid #CBD5E1',
-      boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
       textDecoration: 'none'
     }}
   >
-    {/* Imagem do vídeo */}
     <img
-      src="https://drive.google.com/thumbnail?id=13HxA2EKSUa8dLdkNMV4o7lHrz-GgkU6M&sz=w1200"
+      src="https://drive.google.com/thumbnail?id=13HxA2EKSUa8dLdkNMV4o7lHrz-GgkU6M&sz=w1600"
       alt="Vídeo explicativo do sistema"
       style={{
         width: '100%',
         height: '100%',
         objectFit: 'cover',
-        display: 'block'
+        opacity: 0.75
       }}
     />
 
-    {/* Overlay escuro */}
-    <div
-      style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'rgba(0,0,0,0.35)'
-      }}
-    />
-
-    {/* Botão Play */}
     <div
       style={{
         position: 'absolute',
@@ -263,29 +251,29 @@ const App = () => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        color: '#fff'
+        gap: '16px',
+        background: 'rgba(0,0,0,0.25)'
       }}
     >
       <div
         style={{
           width: '90px',
           height: '90px',
+          backgroundColor: '#ffffff',
           borderRadius: '50%',
-          background: '#fff',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0 10px 20px rgba(0,0,0,0.25)',
-          marginBottom: '12px'
+          boxShadow: '0 10px 25px rgba(0,0,0,0.3)'
         }}
       >
         <div
           style={{
             width: 0,
             height: 0,
-            borderTop: '14px solid transparent',
-            borderBottom: '14px solid transparent',
-            borderLeft: '24px solid #2563EB',
+            borderTop: '16px solid transparent',
+            borderBottom: '16px solid transparent',
+            borderLeft: '26px solid #2563EB',
             marginLeft: '4px'
           }}
         />
@@ -293,19 +281,17 @@ const App = () => {
 
       <span
         style={{
-          background: 'rgba(255,255,255,0.9)',
-          color: '#1E293B',
-          padding: '6px 14px',
+          backgroundColor: 'rgba(255,255,255,0.9)',
+          padding: '6px 16px',
           borderRadius: '999px',
           fontWeight: 600,
-          fontSize: '0.95rem'
+          color: '#1E293B'
         }}
       >
         Abrir vídeo demonstrativo
       </span>
     </div>
   </a>
-</Section>
 </Section>
       </main>
 
