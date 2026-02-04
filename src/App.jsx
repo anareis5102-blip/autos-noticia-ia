@@ -296,12 +296,26 @@ const App = () => {
       </main>
 
       {/* 7. Rodapé */}
-      <footer className="bg-blue-900 text-slate-400 py-12">
-  <div className="container mx-auto px-6 max-w-5xl text-center">
-    <h3 className="text-white font-bold text-lg mb-2">
+      <footer
+  style={{
+    backgroundColor: '#1E3A8A',
+    color: '#CBD5E1',
+    padding: '48px 24px',
+    textAlign: 'center'
+  }}
+>
+  <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+    <h3
+      style={{
+        color: '#FFFFFF',
+        fontWeight: 'bold',
+        fontSize: '1.1rem',
+        marginBottom: '8px'
+      }}
+    >
       Sistema de Análise de Autos de Notícia com Inteligência Artificial
     </h3>
-    <p className="text-sm">
+    <p style={{ fontSize: '0.9rem', margin: 0 }}>
       Projeto desenvolvido com recurso a tecnologias de Inteligência Artificial.
     </p>
   </div>
