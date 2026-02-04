@@ -215,27 +215,99 @@ const App = () => {
 
         {/* 6. Vídeo Explicativo */}
         <Section title="Vídeo Explicativo" id="video" icon={<Video size={28} />}>
+  {/* 6. Vídeo Explicativo */}
+<Section title="Vídeo Explicativo" id="video" icon={<Video size={28} />}>
   <a
     href="https://app.heygen.com/videos/5adc004b083f447a9794d1dd88405c5a"
     target="_blank"
     rel="noopener noreferrer"
-    className="block aspect-video bg-slate-200 rounded-2xl flex items-center justify-center shadow-inner relative group cursor-pointer overflow-hidden border border-slate-300"
+    style={{
+      display: 'block',
+      position: 'relative',
+      width: '100%',
+      maxWidth: '900px',
+      margin: '0 auto',
+      aspectRatio: '16 / 9',
+      borderRadius: '16px',
+      overflow: 'hidden',
+      border: '1px solid #CBD5E1',
+      boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+      textDecoration: 'none'
+    }}
   >
+    {/* Imagem do vídeo */}
     <img
       src="https://drive.google.com/thumbnail?id=13HxA2EKSUa8dLdkNMV4o7lHrz-GgkU6M&sz=w1200"
       alt="Vídeo explicativo do sistema"
-      className="absolute inset-0 w-full h-full object-cover opacity-40 transition-opacity group-hover:opacity-30"
+      style={{
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        display: 'block'
+      }}
     />
 
-    <div className="relative z-10 flex flex-col items-center">
-      <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
-        <div className="w-0 h-0 border-t-[12px] border-t-transparent border-l-[20px] border-l-blue-600 border-b-[12px] border-b-transparent ml-1"></div>
+    {/* Overlay escuro */}
+    <div
+      style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'rgba(0,0,0,0.35)'
+      }}
+    />
+
+    {/* Botão Play */}
+    <div
+      style={{
+        position: 'absolute',
+        inset: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#fff'
+      }}
+    >
+      <div
+        style={{
+          width: '90px',
+          height: '90px',
+          borderRadius: '50%',
+          background: '#fff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 10px 20px rgba(0,0,0,0.25)',
+          marginBottom: '12px'
+        }}
+      >
+        <div
+          style={{
+            width: 0,
+            height: 0,
+            borderTop: '14px solid transparent',
+            borderBottom: '14px solid transparent',
+            borderLeft: '24px solid #2563EB',
+            marginLeft: '4px'
+          }}
+        />
       </div>
-      <p className="mt-4 font-semibold text-slate-800 bg-white/80 backdrop-blur px-4 py-1 rounded-full">
+
+      <span
+        style={{
+          background: 'rgba(255,255,255,0.9)',
+          color: '#1E293B',
+          padding: '6px 14px',
+          borderRadius: '999px',
+          fontWeight: 600,
+          fontSize: '0.95rem'
+        }}
+      >
         Abrir vídeo demonstrativo
-      </p>
+      </span>
     </div>
   </a>
+</Section>
 </Section>
       </main>
 
