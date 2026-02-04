@@ -103,6 +103,14 @@ const App = () => {
               <p className="mb-6">
                 O papel do agente de Inteligência Artificial é atuar como uma camada de supervisão técnica incansável. Ao contrário da análise humana, que pode ser afetada pela fadiga ou volume de trabalho, a nossa IA analisa:
               </p>
+              <div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '32px'
+  }}
+>
+              <div>
               <div style={{ marginBottom: '24px' }}>
   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
     <div
@@ -127,7 +135,7 @@ const App = () => {
   <p style={{ fontSize: '0.9rem', color: '#334155', marginTop: '8px' }}>
     Identificação de omissões de datas, locais ou identificações obrigatórias segundo o Código de Processo Penal.
   </p>
-</div>
+<div>
                 <div style={{ marginBottom: '24px' }}>
   <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
     <div
@@ -177,6 +185,7 @@ const App = () => {
   <p style={{ fontSize: '0.9rem', color: '#334155', marginTop: '8px' }}>
     Sugestão de artigos legais pertinentes com base na descrição qualitativa do evento reportado.
   </p>
+</div>
 </div>
               </div>
             </div>
