@@ -215,7 +215,7 @@ const App = () => {
               <p className="text-slate-500">Documento PDF com os resultados estatísticos e metodológicos do projeto.</p>
             </div>
             <a 
-              href="https://drive.google.com/uc?id=1G-9DjWkP6P6XGEBazMDeibR2lVoKVp51" 
+              href="/relatorio.pdf" 
               className="flex items-center gap-3 text-blue-600 font-bold border-2 border-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
             >
               <FileText size={20} />
