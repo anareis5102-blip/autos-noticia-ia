@@ -227,6 +227,79 @@ const App = () => {
     placeholder="Cole aqui a análise do Agente IA..."
   >
     {/* Cole aqui o texto do IA */}
+    RELATÓRIO DE ERROS E INCOERÊNCIAS — AUTOS DE NOTÍCIA
+1. Erros Formais Detetados
+AUTO 1
+
+Campo “Documento de Identificação” contém apenas “Cartão de Cidadão n.º 14567890”, mas não há data de validade nem entidade emissora (caso o formulário exija).
+Alguns campos de identificação do autuado parecem existir mas permanecem vazios (ex.: contactos, NIF), embora não seja possível confirmar se eram obrigatórios.
+Na secção final existem vários campos totalmente vazios após a data 2026/01/14 — possível ausência de registos obrigatórios.
+
+AUTO 2
+
+“Pessoa Coletiva ou Equiparada” selecionada, mas campos de identificação da entidade começam vazios até à linha com “Terrasol – Construções Rurais, Lda.” — indica possível desalinhamento ou erro de formatação.
+Campo de identificação dos representantes (“Pedro Luís Almeida — Almancil e Sofia Martins Costa — Loulé”) usa caracteres especiais (travessão) e estrutura pouco padronizada.
+Campos após a última data (2026/01/30) aparecem vazios — possível incumprimento de campos obrigatórios.
+
+AUTO 3
+
+Endereço do autuado indicado apenas como “Monchique” — potencial insuficiência se o formulário exigir morada completa.
+Dois nomes diferentes para a técnica: “Helena Ramos” e “Helena Sofia Ramos”.
+Tal como nos anteriores, campos finais encontram-se em branco.
+
+AUTO 4
+
+“Inspetor Ambiental” surge duplicado: no campo da função e no campo do nome/título técnico — possível preenchimento automático incorreto ou campo trocado.
+Representante da pessoa coletiva aparece apenas como “Ricardo Nunes Silva — Tavira”, com estrutura informal.
+Campos finais vazios após 2026/02/18.
+
+AUTO 5
+
+Documento de identificação do autuado: “Cartão de Cidadão n.º 15678903” sem dados complementares.
+Função da técnica aparece duas vezes (“Técnica de Fiscalização Municipal” duplicado).
+Campos posteriores à data final estão vazios.
+
+
+AUTOS CLARAMENTE INCOMPLETOS OU COM ERROS GRAVES
+AUTO 6
+
+Texto composto por cadeias de caracteres sem sentido (“sdgj”, “adfhsf”).
+Campos essenciais ausentes: identificação do autuado, NIF, representante, descrição factual coerente.
+Estrutura do auto não segue qualquer padrão do formulário.
+Auto manifestamente incompleto.
+
+AUTO 7
+
+Conteúdo composto maioritariamente por texto sem sentido ou caracteres aleatórios (“rpékjfgljrekgçl”, “jlsdbfgvlkdfjlk”).
+Identificação do autuado ilegível (“gkºtçlhkºtç”, “´+erog´peohg”).
+Morada e restantes campos essenciais incompletos ou sem coerência.
+Auto não contém dados válidos.
+
+AUTO 8
+
+Título da infração e descrição (“gdfhfg”, “srgtryurt”) não apresentam significado.
+Número “354587” surge isolado — não está claro se é NIF, CC ou outro identificador.
+Campos finais apresentam combinações de caracteres aleatórios (“3w5r435”, “tuytuu”, “etuy7”).
+Preenchimento incorreto e não conforme.
+
+AUTO 9
+
+Data da infração (2026/02/24) é posterior à data de deteção pela técnica (2026/02/23), o que cria incoerência temporal.
+Campo do “autuante” apresenta dois nomes diferentes no mesmo bloco (Ana Reis — Engenheira ambiental / Ana Viegas), podendo indicar troca de campos ou autorias duplicadas.
+O campo do NIF/identificação da empresa está vazio após “456789”.
+
+
+2. Observações de Clareza e Redação
+
+Em vários autos surgem descrições claras mas sem uniformidade — algumas muito completas, outras extremamente curtas ou inexistentes (especialmente autos 6–8).
+A utilização de travessões longos (—) para separar nomes de localidades poderá causar problemas ao integrar dados em sistemas automáticos.
+Em vários autos não é possível perceber se os campos vazios são permitidos ou resultam de erro no preenchimento.
+Nos autos com texto aleatório (6, 7, 8), o conteúdo impede qualquer interpretação segura do facto ou dos intervenientes.
+Alguns autos utilizam maiúsculas inconsistentes (“Despejo Ilegal de Resíduos”) — não é erro jurídico, mas compromete uniformidade de registos.
+
+
+3. Nota de Limitação da IA
+Este relatório analisa apenas erros formais, incoerências e ambiguidades de preenchimento, sem qualquer apreciação jurídica ou avaliação do mérito das infrações. A análise baseia‑se exclusivamente no texto fornecido, podendo existir regras internas de formulário não visíveis que influenciem a interpretação.
   </div>
 
   {/* Botão para gerar PDF */}
