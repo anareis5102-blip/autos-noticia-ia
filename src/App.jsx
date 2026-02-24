@@ -259,7 +259,7 @@ Documento de identificação do autuado: “Cartão de Cidadão n.º 15678903”
 Função da técnica aparece duas vezes (“Técnica de Fiscalização Municipal” duplicado).
 Campos posteriores à data final estão vazios.
 
-
+    
 AUTOS CLARAMENTE INCOMPLETOS OU COM ERROS GRAVES
 AUTO 6
 
@@ -344,8 +344,7 @@ Este relatório analisa apenas erros formais, incoerências e ambiguidades de pr
     Descarregar PDF
   </button>
 </section>
-          </div>
-        </Section>
+         </Section>
 
          {/* 6. Vídeo Explicativo */}
 <Section id="video" title="Vídeo Explicativo" icon={<Video size={28} />}>
