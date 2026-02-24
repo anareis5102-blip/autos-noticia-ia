@@ -214,13 +214,63 @@ const App = () => {
               <h4 className="text-xl font-bold text-slate-800 mb-2">Relatório Técnico Detalhado</h4>
               <p className="text-slate-500">Documento PDF com os resultados estatísticos e metodológicos do projeto.</p>
             </div>
-            <a 
-              href="/relatorio.pdf" 
-              className="flex items-center gap-3 text-blue-600 font-bold border-2 border-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
-            >
-              <FileText size={20} />
-              Descarregar PDF (Exemplo)
-            </a>
+           <section className="p-8 bg-blue-50 rounded-xl">
+  <h4 className="text-xl font-bold text-slate-800 mb-4">
+    Relatório de Análise
+  </h4>
+
+  {/* Área para colar análise do IA */}
+  <div
+    id="relatorio"
+    contentEditable={true}
+    className="p-6 mb-6 bg-white border border-slate-200 rounded-lg min-h-[200px] text-slate-700 whitespace-pre-wrap"
+    placeholder="Cole aqui a análise do Agente IA..."
+  >
+    {/* Cole aqui o texto do IA */}
+  </div>
+
+  {/* Botão para gerar PDF */}
+  <button
+    onClick={() => {
+      const conteudo = document.getElementById("relatorio").innerText;
+      if (!conteudo.trim()) {
+        alert("Cole a análise do IA antes de gerar o PDF!");
+        return;
+      }
+
+      const pdf = new jsPDF();
+      const linhas = conteudo.split(/\r?\n/);
+      let y = 10;
+
+      // Adiciona data no topo
+      const dataAtual = new Date();
+      const dataFormatada = dataAtual.toLocaleString();
+      pdf.setFontSize(10);
+      pdf.text(`Data do Relatório: ${dataFormatada}`, 10, y);
+      y += 10;
+
+      pdf.setFontSize(12);
+
+      linhas.forEach((linha) => {
+        const textoQuebrado = pdf.splitTextToSize(linha, 180);
+        textoQuebrado.forEach((t) => {
+          pdf.text(t, 10, y);
+          y += 10;
+          if (y > 280) {
+            pdf.addPage();
+            y = 10;
+          }
+        });
+      });
+
+      pdf.save("relatorio.pdf");
+    }}
+    className="flex items-center gap-3 text-blue-600 font-bold border-2 border-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
+  >
+    <FileText size={20} />
+    Descarregar PDF
+  </button>
+</section>
           </div>
         </Section>
 
