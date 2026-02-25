@@ -208,7 +208,7 @@ const App = () => {
   </div>
 </Section>
         {/* 5. Relatório de Análise */}
-        <Section title="Relatório de Análise" id="relatorio" bg="bg-blue-50" icon={<FileText size={28} />}>
+        <Section title="Relatório de Análise" id="secao-relatorio" bg="bg-blue-50" icon={<FileText size={28} />}>
           <div className="flex flex-col md:flex-row items-center justify-between p-8 bg-white border border-slate-200 rounded-xl">
             <div className="mb-6 md:mb-0">
               <h4 className="text-xl font-bold text-slate-800 mb-2">Relatório Técnico Detalhado</h4>
