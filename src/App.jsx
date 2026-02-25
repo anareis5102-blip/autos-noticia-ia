@@ -218,7 +218,6 @@ const App = () => {
   <h4 className="text-xl font-bold text-slate-800 mb-4">
     Relatório de Análise
   </h4>
-
   {/* Área para colar análise do IA */}
   <div
     id="relatorio"
@@ -227,9 +226,7 @@ const App = () => {
     placeholder="Cole aqui a análise do Agente IA..."
   >
     {/* Cole aqui o texto do IA */}
-    
   </div>
-
   {/* Botão para gerar PDF */}
   <button
     onClick={() => {
