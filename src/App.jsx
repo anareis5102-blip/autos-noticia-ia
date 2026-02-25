@@ -220,11 +220,10 @@ const App = () => {
   </h4>
   {/* Área para colar análise do IA */}
   <div
-    id="relatorio"
-    contentEditable={true}
-    className="p-6 mb-6 bg-white border border-slate-200 rounded-lg min-h-[200px] text-slate-700 whitespace-pre-wrap"
+  id="relatorio"
+  contentEditable={true}
+  className="p-6 mb-6 bg-white border border-slate-200 rounded-lg min-h-[200px] text-slate-700 whitespace-pre-wrap"
     >
-    TESTE 12345
   </div>
   {/* Botão para gerar PDF */}
   <button
