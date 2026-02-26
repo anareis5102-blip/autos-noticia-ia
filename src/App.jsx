@@ -208,23 +208,13 @@ const App = () => {
     </div>
   </div>
 </Section>
-        {/* 5. Relatório de Análise */}
-        <Section title="Relatório de Análise" id="secao-relatorio" bg="bg-blue-50" icon={<FileText size={28} />}>
-          <div className="flex flex-col md:flex-row items-center justify-between p-8 bg-white border border-slate-200 rounded-xl">
-            <div className="mb-6 md:mb-0">
-              <h4 className="text-xl font-bold text-slate-800 mb-2">Relatório Técnico Detalhado</h4>
-              <p className="text-slate-500">Documento PDF com os resultados estatísticos e metodológicos do projeto.</p>
-            </div>
-           <section className="p-8 bg-blue-50 rounded-xl">
-  <h4 className="text-xl font-bold text-slate-800 mb-4">
-    Relatório de Análise
-  </h4>
-{/* Área do Relatório */}
+       {/* 5. Relatório de Análise */}
 <section
   title="Relatório de Análise"
   id="secao-relatorio"
   className="p-8 bg-blue-50 rounded-xl"
 >
+  {/* Título do Relatório */}
   <h4 className="text-xl font-bold text-slate-800 mb-4">
     Relatório de Análise
   </h4>
@@ -284,7 +274,7 @@ const App = () => {
     <FileText size={20} />
     Descarregar PDF
   </button>
-</section> 
+</section>
             </div>
          </Section>
          {/* 6. Vídeo Explicativo */}
