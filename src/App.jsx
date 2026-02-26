@@ -234,6 +234,7 @@ const App = () => {
         return;
       }
 
+      const { jsPDF } = window.jspdf;
       const pdf = new jsPDF();
       const linhas = conteudo.split(/\r?\n/);
       let y = 10;
