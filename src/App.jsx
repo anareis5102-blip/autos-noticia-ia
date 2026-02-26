@@ -227,41 +227,14 @@ const App = () => {
   </div>
   {/* Botão para gerar PDF */}
   <button
-    onClick={() => {
-      const conteudo = document.getElementById("relatorio").innerText;
-      if (!conteudo.trim()) {
-        alert("Cole a análise do IA antes de gerar o PDF!");
-        return;
-      }
+   onClick={() => {
+  console.log("BOTÃO CLICADO");
 
-      const { jsPDF } = window.jspdf;
-      const pdf = new jsPDF();
-      const linhas = conteudo.split(/\r?\n/);
-      let y = 10;
-
-      // Adiciona data no topo
-      const dataAtual = new Date();
-      const dataFormatada = dataAtual.toLocaleString();
-      pdf.setFontSize(10);
-      pdf.text(`Data do Relatório: ${dataFormatada}`, 10, y);
-      y += 10;
-
-      pdf.setFontSize(12);
-
-      linhas.forEach((linha) => {
-        const textoQuebrado = pdf.splitTextToSize(linha, 180);
-        textoQuebrado.forEach((t) => {
-          pdf.text(t, 10, y);
-          y += 10;
-          if (y > 280) {
-            pdf.addPage();
-            y = 10;
-          }
-        });
-      });
-
-      pdf.save("relatorio.pdf");
-    }}
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
+  pdf.text("PDF FUNCIONA", 20, 20);
+  pdf.save("teste.pdf");
+}}
     className="flex items-center gap-3 text-blue-600 font-bold border-2 border-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
   >
     <FileText size={20} />
