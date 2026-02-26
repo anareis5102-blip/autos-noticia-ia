@@ -26,6 +26,7 @@ const Section = ({ title, id, children, bg = "bg-white", icon }) => (
   </section>
 );
 const App = () => {
+    const relatorioRef = useRef(null);
   return (
     <div className="min-h-screen flex flex-col">
       {/* 1. Cabeçalho */}
