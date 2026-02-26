@@ -275,7 +275,6 @@ const App = () => {
     Descarregar PDF
   </button>
 </Section>
-            </div>
          {/* 6. Vídeo Explicativo */}
 <Section id="video" title="Vídeo Explicativo" icon={<Video size={28} />}>
   <a
