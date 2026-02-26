@@ -209,10 +209,10 @@ const App = () => {
   </div>
 </Section>
        {/* 5. Relatório de Análise */}
-<section
-  title="Relatório de Análise"
+<Section
   id="secao-relatorio"
-  className="p-8 bg-blue-50 rounded-xl"
+  title="Relatório de Análise"
+  icon={<FileText size={28} />}
 >
   {/* Título do Relatório */}
   <h4 className="text-xl font-bold text-slate-800 mb-4">
@@ -274,7 +274,7 @@ const App = () => {
     <FileText size={20} />
     Descarregar PDF
   </button>
-</section>
+</Section>
             </div>
          {/* 6. Vídeo Explicativo */}
 <Section id="video" title="Vídeo Explicativo" icon={<Video size={28} />}>
