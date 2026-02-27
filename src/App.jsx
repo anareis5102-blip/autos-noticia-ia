@@ -231,44 +231,49 @@ const App = () => {
   {/* Botão para gerar PDF */}
   <button
     onClick={() => {
-      const { jsPDF } = window.jspdf;
+  const { jsPDF } = window.jspdf;
 
-      const conteudo = relatorioRef.current?.textContent || "";
+  const conteudo = relatorioRef.current?.innerText || "";
 
-      if (!conteudo.replace(/\s/g, "").length) {
-        alert("Cole a análise do IA antes de gerar o PDF!");
-        return;
+  if (!conteudo.trim()) {
+    alert("Cole a análise do IA antes de gerar o PDF!");
+    return;
+  }
+
+  const pdf = new jsPDF();
+  const margemEsquerda = 15;
+  const larguraMaxima = 180;
+  const alturaPagina = 290;
+  let y = 20;
+
+  // Data no topo
+  const dataAtual = new Date().toLocaleString();
+  pdf.setFontSize(10);
+  pdf.text(`Data do Relatório: ${dataAtual}`, margemEsquerda, 10);
+
+  pdf.setFontSize(12);
+
+  // Divide por PARÁGRAFOS reais
+  const paragrafos = conteudo.split(/\n\s*\n/);
+
+  paragrafos.forEach((paragrafo) => {
+    const linhas = pdf.splitTextToSize(paragrafo.trim(), larguraMaxima);
+
+    linhas.forEach((linha) => {
+      if (y > alturaPagina) {
+        pdf.addPage();
+        y = 20;
       }
 
-      const pdf = new jsPDF();
-      const linhas = conteudo.split(/\r?\n/);
-      let y = 10;
+      pdf.text(linha, margemEsquerda, y);
+      y += 7;
+    });
 
-      const dataAtual = new Date();
-      const dataFormatada = dataAtual.toLocaleString();
+    y += 5; // Espaço extra entre parágrafos
+  });
 
-      pdf.setFontSize(10);
-      pdf.text(`Data do Relatório: ${dataFormatada}`, 10, y);
-      y += 10;
-
-      pdf.setFontSize(12);
-
-      linhas.forEach((linha) => {
-        const textoQuebrado = pdf.splitTextToSize(linha, 180);
-
-        textoQuebrado.forEach((t) => {
-          pdf.text(t, 10, y);
-          y += 10;
-
-          if (y > 280) {
-            pdf.addPage();
-            y = 10;
-          }
-        });
-      });
-
-      pdf.save("relatorio.pdf");
-    }}
+  pdf.save("relatorio.pdf");
+}}
     className="flex items-center gap-3 text-blue-600 font-bold border-2 border-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
   >
     <FileText size={20} />
