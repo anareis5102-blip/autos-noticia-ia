@@ -242,11 +242,17 @@ const App = () => {
 
   const pdf = new jsPDF("p", "pt", "a4");
 
+  const larguraPagina = pdf.internal.pageSize.getWidth();
+
   await pdf.html(elemento, {
-    margin: 40,
+    x: 30,
+    y: 30,
+    width: larguraPagina - 60, // usa quase toda a largura
+    windowWidth: elemento.scrollWidth,
     autoPaging: "text",
     html2canvas: {
-      scale: 0.8
+      scale: 1.2, // melhora qualidade e evita colagem de letras
+      useCORS: true
     }
   });
 
