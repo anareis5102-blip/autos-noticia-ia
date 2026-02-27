@@ -230,46 +230,24 @@ const App = () => {
 
   {/* Botão para gerar PDF */}
   <button
-    onClick={() => {
+    onClick={async () => {
   const { jsPDF } = window.jspdf;
 
-  const conteudo = relatorioRef.current?.innerText || "";
+  const elemento = relatorioRef.current;
 
-  if (!conteudo.trim()) {
+  if (!elemento || !elemento.innerText.trim()) {
     alert("Cole a análise do IA antes de gerar o PDF!");
     return;
   }
 
-  const pdf = new jsPDF();
-  const margemEsquerda = 15;
-  const larguraMaxima = 180;
-  const alturaPagina = 290;
-  let y = 20;
+  const pdf = new jsPDF("p", "pt", "a4");
 
-  // Data no topo
-  const dataAtual = new Date().toLocaleString();
-  pdf.setFontSize(10);
-  pdf.text(`Data do Relatório: ${dataAtual}`, margemEsquerda, 10);
-
-  pdf.setFontSize(12);
-
-  // Divide por PARÁGRAFOS reais
-  const paragrafos = conteudo.split(/\n\s*\n/);
-
-  paragrafos.forEach((paragrafo) => {
-    const linhas = pdf.splitTextToSize(paragrafo.trim(), larguraMaxima);
-
-    linhas.forEach((linha) => {
-      if (y > alturaPagina) {
-        pdf.addPage();
-        y = 20;
-      }
-
-      pdf.text(linha, margemEsquerda, y);
-      y += 7;
-    });
-
-    y += 5; // Espaço extra entre parágrafos
+  await pdf.html(elemento, {
+    margin: 40,
+    autoPaging: "text",
+    html2canvas: {
+      scale: 0.8
+    }
   });
 
   pdf.save("relatorio.pdf");
