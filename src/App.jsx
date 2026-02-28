@@ -214,11 +214,7 @@ const App = () => {
   title="Relatório de Análise"
   icon={<FileText size={28} />}
 >
-  {/* Título do Relatório */}
-  <h4 className="text-xl font-bold text-slate-800 mb-4">
-    Relatório de Análise
-  </h4>
-
+  
   {/* Div editável */}
   <div
     ref={relatorioRef}
