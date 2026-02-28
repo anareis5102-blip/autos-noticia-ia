@@ -230,31 +230,105 @@ const App = () => {
 
   {/* Botão para gerar PDF */}
   <button
-    onClick={async () => {
+    onClick={() => {
   const { jsPDF } = window.jspdf;
 
-  const elemento = relatorioRef.current;
+  const conteudo = relatorioRef.current?.innerText || "";
 
-  if (!elemento || !elemento.innerText.trim()) {
+  if (!conteudo.trim()) {
     alert("Cole a análise do IA antes de gerar o PDF!");
     return;
   }
 
   const pdf = new jsPDF("p", "pt", "a4");
 
+  const margem = 50;
   const larguraPagina = pdf.internal.pageSize.getWidth();
+  const alturaPagina = pdf.internal.pageSize.getHeight();
+  const larguraTexto = larguraPagina - margem * 2;
 
-  await pdf.html(elemento, {
-    x: 30,
-    y: 30,
-    width: larguraPagina - 60, // usa quase toda a largura
-    windowWidth: elemento.scrollWidth,
-    autoPaging: "text",
-    html2canvas: {
-      scale: 1.2, // melhora qualidade e evita colagem de letras
-      useCORS: true
-    }
+  let y = 100;
+
+  // =========================
+  // CABEÇALHO INSTITUCIONAL
+  // =========================
+
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(16);
+  pdf.text("RELATÓRIO DE ANÁLISE", larguraPagina / 2, 60, {
+    align: "center",
   });
+
+  pdf.setFontSize(10);
+  pdf.setFont("helvetica", "normal");
+  pdf.text(
+    `Data: ${new Date().toLocaleString()}`,
+    larguraPagina - margem,
+    75,
+    { align: "right" }
+  );
+
+  // Linha separadora
+  pdf.setDrawColor(200);
+  pdf.line(margem, 85, larguraPagina - margem, 85);
+
+  // =========================
+  // CORPO DO RELATÓRIO
+  // =========================
+
+  pdf.setFontSize(12);
+  const paragrafos = conteudo.split(/\n\s*\n/);
+
+  paragrafos.forEach((paragrafo) => {
+    const texto = paragrafo.trim();
+
+    if (!texto) return;
+
+    // Detectar título simples (linha curta ou maiúsculas)
+    const isTitulo =
+      texto.length < 60 && texto === texto.toUpperCase();
+
+    if (isTitulo) {
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(13);
+      y += 15;
+    } else {
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(12);
+    }
+
+    const linhas = pdf.splitTextToSize(texto, larguraTexto);
+
+    linhas.forEach((linha) => {
+      if (y > alturaPagina - 60) {
+        pdf.addPage();
+        y = 60;
+      }
+
+      pdf.text(linha, margem, y);
+      y += 18;
+    });
+
+    y += 10;
+  });
+
+  // =========================
+  // RODAPÉ
+  // =========================
+
+  const totalPaginas = pdf.getNumberOfPages();
+
+  for (let i = 1; i <= totalPaginas; i++) {
+    pdf.setPage(i);
+    pdf.setFontSize(9);
+    pdf.setTextColor(150);
+    pdf.text(
+      `Página ${i} de ${totalPaginas}`,
+      larguraPagina / 2,
+      alturaPagina - 20,
+      { align: "center" }
+    );
+  }
 
   pdf.save("relatorio.pdf");
 }}
