@@ -230,15 +230,25 @@ const App = () => {
 
   {/* Botão para gerar PDF */}
   <button
-   onClick={() => {
+  onClick={() => {
   const { jsPDF } = window.jspdf;
 
-  const conteudo = relatorioRef.current?.innerText || "";
+  let conteudo = relatorioRef.current?.innerText || "";
 
   if (!conteudo.trim()) {
     alert("Cole a análise do IA antes de gerar o PDF!");
     return;
   }
+
+  // =========================
+  // NORMALIZAÇÃO DE CARACTERES
+  // =========================
+  conteudo = conteudo
+    .replace(/→/g, "->")
+    .replace(/“|”/g, '"')
+    .replace(/’/g, "'")
+    .replace(/—/g, "-")
+    .replace(/–/g, "-");
 
   const pdf = new jsPDF("p", "pt", "a4");
 
@@ -292,7 +302,6 @@ const App = () => {
       return;
     }
 
-    // Se ultrapassar página
     if (y > alturaPagina - 60) {
       pdf.addPage();
       y = 60;
@@ -320,7 +329,7 @@ const App = () => {
       return;
     }
 
-    // Detecta linhas com ponto inicial
+    // Detecta linhas que começam com ponto
     if (texto.startsWith(".")) {
       pdf.setFont("helvetica", "normal");
       pdf.setFontSize(12);
