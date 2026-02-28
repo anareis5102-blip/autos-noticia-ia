@@ -248,7 +248,9 @@ const App = () => {
     .replace(/“|”/g, '"')
     .replace(/’/g, "'")
     .replace(/—/g, "-")
-    .replace(/–/g, "-");
+    .replace(/–/g, "-")
+    .replace(/\u2011/g, "-")   // non-breaking hyphen
+    .replace(/\u00A0/g, " ");  // non-breaking space
 
   const pdf = new jsPDF("p", "pt", "a4");
 
@@ -263,7 +265,6 @@ const App = () => {
   // =========================
   // CABEÇALHO
   // =========================
-
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(16);
 
@@ -291,7 +292,6 @@ const App = () => {
   // =========================
   // CORPO
   // =========================
-
   const linhas = conteudo.split("\n");
 
   linhas.forEach((linha) => {
@@ -374,7 +374,6 @@ const App = () => {
   // =========================
   // RODAPÉ
   // =========================
-
   const totalPaginas = pdf.getNumberOfPages();
 
   for (let i = 1; i <= totalPaginas; i++) {
