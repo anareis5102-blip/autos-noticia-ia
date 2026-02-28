@@ -230,7 +230,7 @@ const App = () => {
 
   {/* Botão para gerar PDF */}
   <button
-    onClick={() => {
+   onClick={() => {
   const { jsPDF } = window.jspdf;
 
   const conteudo = relatorioRef.current?.innerText || "";
@@ -248,19 +248,25 @@ const App = () => {
   const larguraTexto = larguraPagina - margem * 2;
 
   let y = 100;
+  let primeiroAuto = true;
 
   // =========================
-  // CABEÇALHO INSTITUCIONAL
+  // CABEÇALHO
   // =========================
 
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(16);
-  pdf.text("RELATÓRIO DE ANÁLISE", larguraPagina / 2, 60, {
-    align: "center",
-  });
+
+  pdf.text(
+    "RELATÓRIO DE ERROS – AUTOS DE NOTÍCIA",
+    larguraPagina / 2,
+    60,
+    { align: "center" }
+  );
 
   pdf.setFontSize(10);
   pdf.setFont("helvetica", "normal");
+
   pdf.text(
     `Data: ${new Date().toLocaleString()}`,
     larguraPagina - margem,
@@ -268,48 +274,92 @@ const App = () => {
     { align: "right" }
   );
 
-  // Linha separadora
   pdf.setDrawColor(200);
+  pdf.setLineWidth(1);
   pdf.line(margem, 85, larguraPagina - margem, 85);
 
   // =========================
-  // CORPO DO RELATÓRIO
+  // CORPO
   // =========================
 
-  pdf.setFontSize(12);
-  const paragrafos = conteudo.split(/\n\s*\n/);
+  const linhas = conteudo.split("\n");
 
-  paragrafos.forEach((paragrafo) => {
-    const texto = paragrafo.trim();
+  linhas.forEach((linha) => {
+    const texto = linha.trim();
 
-    if (!texto) return;
-
-    // Detectar título simples (linha curta ou maiúsculas)
-    const isTitulo =
-      texto.length < 60 && texto === texto.toUpperCase();
-
-    if (isTitulo) {
-      pdf.setFont("helvetica", "bold");
-      pdf.setFontSize(13);
-      y += 15;
-    } else {
-      pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(12);
+    if (!texto) {
+      y += 10;
+      return;
     }
 
-    const linhas = pdf.splitTextToSize(texto, larguraTexto);
+    // Se ultrapassar página
+    if (y > alturaPagina - 60) {
+      pdf.addPage();
+      y = 60;
+    }
 
-    linhas.forEach((linha) => {
+    // Detecta AUTO X
+    if (/^AUTO\s+\d+/i.test(texto)) {
+
+      if (!primeiroAuto) {
+        y += 15;
+        pdf.setDrawColor(180);
+        pdf.setLineWidth(0.8);
+        pdf.line(margem, y, larguraPagina - margem, y);
+        y += 25;
+      } else {
+        y += 20;
+        primeiroAuto = false;
+      }
+
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(14);
+      pdf.text(texto.toUpperCase(), margem, y);
+
+      y += 20;
+      return;
+    }
+
+    // Detecta linhas com ponto inicial
+    if (texto.startsWith(".")) {
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(12);
+
+      const textoLimpo = texto.substring(1).trim();
+
+      const linhasQuebradas = pdf.splitTextToSize(
+        "• " + textoLimpo,
+        larguraTexto
+      );
+
+      linhasQuebradas.forEach((l) => {
+        if (y > alturaPagina - 60) {
+          pdf.addPage();
+          y = 60;
+        }
+
+        pdf.text(l, margem, y);
+        y += 18;
+      });
+
+      return;
+    }
+
+    // Texto normal
+    pdf.setFont("helvetica", "normal");
+    pdf.setFontSize(12);
+
+    const linhasQuebradas = pdf.splitTextToSize(texto, larguraTexto);
+
+    linhasQuebradas.forEach((l) => {
       if (y > alturaPagina - 60) {
         pdf.addPage();
         y = 60;
       }
 
-      pdf.text(linha, margem, y);
+      pdf.text(l, margem, y);
       y += 18;
     });
-
-    y += 10;
   });
 
   // =========================
@@ -322,6 +372,7 @@ const App = () => {
     pdf.setPage(i);
     pdf.setFontSize(9);
     pdf.setTextColor(150);
+
     pdf.text(
       `Página ${i} de ${totalPaginas}`,
       larguraPagina / 2,
