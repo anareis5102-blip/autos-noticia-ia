@@ -567,7 +567,7 @@ const App = () => {
 </Section>
       </main>
 
-      {/* 7. Rodapé */}
+      { /* 7. Rodapé */ }
       <footer
   style={{
     backgroundColor: '#1E3A8A',
