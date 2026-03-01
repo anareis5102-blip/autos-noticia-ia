@@ -223,6 +223,19 @@ const App = () => {
     placeholder="Cole aqui a análise do Agente IA..."
   ></div>
 
+  {/* Botão para gerar PDF centralizado */}
+  <div className="flex justify-center">
+    <a
+      onClick={() => {
+        // ... lógica completa do PDF aqui ...
+      }}
+      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-10 rounded-lg shadow-md transition-all transform hover:-translate-y-1 cursor-pointer"
+    >
+      <FileText size={18} />
+      Descarregar PDF
+    </a>
+  </div>
+</Section>
   {/* Botão para gerar PDF com estilo do botão do formulário online */}
   <a
     onClick={() => {
