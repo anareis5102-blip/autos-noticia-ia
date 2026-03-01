@@ -221,9 +221,9 @@ const App = () => {
     suppressContentEditableWarning
     className="p-6 mb-6 bg-white border border-slate-200 rounded-lg min-h-[200px] text-slate-700 whitespace-pre-wrap"
     placeholder="Cole aqui a análise do Agente IA..."
-  ></div>
-  
-{/* Botão centralizado para gerar PDF */}
+  >
+  </div>
+  {/* Botão centralizado para gerar PDF */}
 <div className="flex justify-center mt-6">
   <button
     onClick={() => {
