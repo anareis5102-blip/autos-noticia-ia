@@ -484,8 +484,7 @@ const App = () => {
     <FileText size={18} />
     Descarregar PDF
   </a>
-</Section>
-         { /* 6. Vídeo Explicativo */ }
+      { /* 6. Vídeo Explicativo */ }
 <Section id="video" title="Vídeo Explicativo" icon={<Video size={28} />}>
   <a
     href="https://app.heygen.com/videos/5adc004b083f447a9794d1dd88405c5a"
