@@ -235,7 +235,6 @@ const App = () => {
           return;
         }
 
-        // Normalização de caracteres
         conteudo = conteudo
           .replace(/→/g, "->")
           .replace(/“|”/g, '"')
@@ -267,7 +266,7 @@ const App = () => {
         pdf.setLineWidth(1);
         pdf.line(margem, 85, larguraPagina - margem, 85);
 
-        // Corpo do PDF
+        // Corpo
         const linhas = conteudo.split("\n");
 
         linhas.forEach((linha) => {
@@ -275,15 +274,9 @@ const App = () => {
           if (!texto) { y += 10; return; }
           if (y > alturaPagina - 60) { pdf.addPage(); y = 60; }
 
-          // Detecta AUTO X
           if (/^AUTO\s+\d+/i.test(texto)) {
-            if (!primeiroAuto) {
-              y += 15;
-              pdf.setDrawColor(180);
-              pdf.setLineWidth(0.8);
-              pdf.line(margem, y, larguraPagina - margem, y);
-              y += 25;
-            } else { y += 20; primeiroAuto = false; }
+            if (!primeiroAuto) { y += 15; pdf.setDrawColor(180); pdf.setLineWidth(0.8); pdf.line(margem, y, larguraPagina - margem, y); y += 25; }
+            else { y += 20; primeiroAuto = false; }
 
             pdf.setFont("helvetica", "bold");
             pdf.setFontSize(14);
@@ -292,7 +285,6 @@ const App = () => {
             return;
           }
 
-          // Linhas que começam com ponto
           if (texto.startsWith(".")) {
             pdf.setFont("helvetica", "normal");
             pdf.setFontSize(12);
@@ -306,7 +298,6 @@ const App = () => {
             return;
           }
 
-          // Texto normal
           pdf.setFont("helvetica", "normal");
           pdf.setFontSize(12);
           const linhasQuebradas = pdf.splitTextToSize(texto, larguraTexto);
