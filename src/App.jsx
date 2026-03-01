@@ -223,8 +223,8 @@ const App = () => {
     placeholder="Cole aqui a análise do Agente IA..."
   ></div>
   
- {/* Botão centralizado para gerar PDF */}
-<div className="flex justify-center mt-4">
+{/* Botão para gerar PDF com estilo do botão do formulário online */}
+<div className="flex justify-center mt-6">
   <button
     onClick={() => {
       const { jsPDF } = window.jspdf;
@@ -267,8 +267,57 @@ const App = () => {
       pdf.setLineWidth(1);
       pdf.line(margem, 85, larguraPagina - margem, 85);
 
-      // Corpo e rodapé do PDF
-      // ... mantém toda a lógica que já tens para escrever linhas, AUTO X, pontos e rodapé ...
+      // Corpo do PDF (mantém tua lógica existente para AUTO X, linhas com ponto e texto normal)
+      const linhas = conteudo.split("\n");
+
+      linhas.forEach((linha) => {
+        const texto = linha.trim();
+        if (!texto) { y += 10; return; }
+        if (y > alturaPagina - 60) { pdf.addPage(); y = 60; }
+
+        if (/^AUTO\s+\d+/i.test(texto)) {
+          if (!primeiroAuto) { y += 15; pdf.setDrawColor(180); pdf.setLineWidth(0.8); pdf.line(margem, y, larguraPagina - margem, y); y += 25; }
+          else { y += 20; primeiroAuto = false; }
+
+          pdf.setFont("helvetica", "bold");
+          pdf.setFontSize(14);
+          pdf.text(texto.toUpperCase(), margem, y);
+          y += 20;
+          return;
+        }
+
+        if (texto.startsWith(".")) {
+          pdf.setFont("helvetica", "normal");
+          pdf.setFontSize(12);
+          const textoLimpo = texto.substring(1).trim();
+          const linhasQuebradas = pdf.splitTextToSize("• " + textoLimpo, larguraTexto);
+          linhasQuebradas.forEach((l) => {
+            if (y > alturaPagina - 60) { pdf.addPage(); y = 60; }
+            pdf.text(l, margem, y);
+            y += 18;
+          });
+          return;
+        }
+
+        // Texto normal
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(12);
+        const linhasQuebradas = pdf.splitTextToSize(texto, larguraTexto);
+        linhasQuebradas.forEach((l) => {
+          if (y > alturaPagina - 60) { pdf.addPage(); y = 60; }
+          pdf.text(l, margem, y);
+          y += 18;
+        });
+      });
+
+      // Rodapé
+      const totalPaginas = pdf.getNumberOfPages();
+      for (let i = 1; i <= totalPaginas; i++) {
+        pdf.setPage(i);
+        pdf.setFontSize(9);
+        pdf.setTextColor(150);
+        pdf.text(`Página ${i} de ${totalPaginas}`, larguraPagina / 2, alturaPagina - 20, { align: "center" });
+      }
 
       pdf.save("relatorio.pdf");
     }}
