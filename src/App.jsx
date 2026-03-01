@@ -223,7 +223,7 @@ const App = () => {
     placeholder="Cole aqui a análise do Agente IA..."
   ></div>
   
-{/* Botão para gerar PDF com estilo do botão do formulário online */}
+{/* Botão centralizado para gerar PDF */}
 <div className="flex justify-center mt-6">
   <button
     onClick={() => {
@@ -267,7 +267,7 @@ const App = () => {
       pdf.setLineWidth(1);
       pdf.line(margem, 85, larguraPagina - margem, 85);
 
-      // Corpo do PDF (mantém tua lógica existente para AUTO X, linhas com ponto e texto normal)
+      // Corpo do PDF
       const linhas = conteudo.split("\n");
 
       linhas.forEach((linha) => {
@@ -275,6 +275,7 @@ const App = () => {
         if (!texto) { y += 10; return; }
         if (y > alturaPagina - 60) { pdf.addPage(); y = 60; }
 
+        // Detecta AUTO X
         if (/^AUTO\s+\d+/i.test(texto)) {
           if (!primeiroAuto) { y += 15; pdf.setDrawColor(180); pdf.setLineWidth(0.8); pdf.line(margem, y, larguraPagina - margem, y); y += 25; }
           else { y += 20; primeiroAuto = false; }
@@ -286,6 +287,7 @@ const App = () => {
           return;
         }
 
+        // Linhas que começam com ponto
         if (texto.startsWith(".")) {
           pdf.setFont("helvetica", "normal");
           pdf.setFontSize(12);
