@@ -224,7 +224,7 @@ const App = () => {
   ></div>
 
   {/* Botão centralizado para gerar PDF */}
-  <div className="flex justify-center mt-6">
+  <div className="flex justify-center w-full mt-6">
     <button
       onClick={() => {
         const { jsPDF } = window.jspdf;
@@ -277,8 +277,13 @@ const App = () => {
 
           // Detecta AUTO X
           if (/^AUTO\s+\d+/i.test(texto)) {
-            if (!primeiroAuto) { y += 15; pdf.setDrawColor(180); pdf.setLineWidth(0.8); pdf.line(margem, y, larguraPagina - margem, y); y += 25; }
-            else { y += 20; primeiroAuto = false; }
+            if (!primeiroAuto) {
+              y += 15;
+              pdf.setDrawColor(180);
+              pdf.setLineWidth(0.8);
+              pdf.line(margem, y, larguraPagina - margem, y);
+              y += 25;
+            } else { y += 20; primeiroAuto = false; }
 
             pdf.setFont("helvetica", "bold");
             pdf.setFontSize(14);
@@ -323,7 +328,7 @@ const App = () => {
 
         pdf.save("relatorio.pdf");
       }}
-      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-10 rounded-lg shadow-md transition-all transform hover:-translate-y-1"
+      className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-10 rounded-lg shadow-md transition-all transform hover:-translate-y-1"
     >
       <FileText size={18} />
       Descarregar PDF
