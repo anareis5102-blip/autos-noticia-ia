@@ -224,7 +224,7 @@ const App = () => {
   ></div>
 
   {/* Botão centralizado para gerar PDF */}
-  <div className="flex justify-center w-full mt-6">
+  <div className="flex justify-center mt-6">
     <button
       onClick={() => {
         const { jsPDF } = window.jspdf;
@@ -235,13 +235,12 @@ const App = () => {
           return;
         }
 
+        // Normalização de caracteres
         conteudo = conteudo
           .replace(/→/g, "->")
           .replace(/“|”/g, '"')
           .replace(/’/g, "'")
-          .replace(/—/g, "-")
-          .replace(/–/g, "-")
-          .replace(/\u2011/g, "-")
+          .replace(/—|–|\u2011/g, "-")
           .replace(/\u00A0/g, " ");
 
         const pdf = new jsPDF("p", "pt", "a4");
@@ -256,17 +255,27 @@ const App = () => {
         // Cabeçalho
         pdf.setFont("helvetica", "bold");
         pdf.setFontSize(16);
-        pdf.text("RELATÓRIO DE ERROS – AUTOS DE NOTÍCIA", larguraPagina / 2, 60, { align: "center" });
+        pdf.text(
+          "RELATÓRIO DE ERROS – AUTOS DE NOTÍCIA",
+          larguraPagina / 2,
+          60,
+          { align: "center" }
+        );
 
         pdf.setFontSize(10);
         pdf.setFont("helvetica", "normal");
-        pdf.text(`Data: ${new Date().toLocaleString()}`, larguraPagina - margem, 75, { align: "right" });
+        pdf.text(
+          `Data: ${new Date().toLocaleString()}`,
+          larguraPagina - margem,
+          75,
+          { align: "right" }
+        );
 
         pdf.setDrawColor(200);
         pdf.setLineWidth(1);
         pdf.line(margem, 85, larguraPagina - margem, 85);
 
-        // Corpo
+        // Corpo do PDF
         const linhas = conteudo.split("\n");
 
         linhas.forEach((linha) => {
@@ -274,9 +283,15 @@ const App = () => {
           if (!texto) { y += 10; return; }
           if (y > alturaPagina - 60) { pdf.addPage(); y = 60; }
 
+          // Detecta AUTO X
           if (/^AUTO\s+\d+/i.test(texto)) {
-            if (!primeiroAuto) { y += 15; pdf.setDrawColor(180); pdf.setLineWidth(0.8); pdf.line(margem, y, larguraPagina - margem, y); y += 25; }
-            else { y += 20; primeiroAuto = false; }
+            if (!primeiroAuto) { 
+              y += 15; 
+              pdf.setDrawColor(180); 
+              pdf.setLineWidth(0.8); 
+              pdf.line(margem, y, larguraPagina - margem, y); 
+              y += 25; 
+            } else { y += 20; primeiroAuto = false; }
 
             pdf.setFont("helvetica", "bold");
             pdf.setFontSize(14);
@@ -285,6 +300,7 @@ const App = () => {
             return;
           }
 
+          // Linhas que começam com ponto
           if (texto.startsWith(".")) {
             pdf.setFont("helvetica", "normal");
             pdf.setFontSize(12);
@@ -298,6 +314,7 @@ const App = () => {
             return;
           }
 
+          // Texto normal
           pdf.setFont("helvetica", "normal");
           pdf.setFontSize(12);
           const linhasQuebradas = pdf.splitTextToSize(texto, larguraTexto);
@@ -319,7 +336,7 @@ const App = () => {
 
         pdf.save("relatorio.pdf");
       }}
-      className="inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-10 rounded-lg shadow-md transition-all transform hover:-translate-y-1"
+      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-10 rounded-lg shadow-md transition-all transform hover:-translate-y-1"
     >
       <FileText size={18} />
       Descarregar PDF
