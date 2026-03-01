@@ -214,7 +214,6 @@ const App = () => {
   title="Relatório de Análise"
   icon={<FileText size={28} />}
 >
-  
   {/* Div editável */}
   <div
     ref={relatorioRef}
@@ -224,174 +223,147 @@ const App = () => {
     placeholder="Cole aqui a análise do Agente IA..."
   ></div>
 
-  {/* Botão para gerar PDF */}
-  <button
-  onClick={() => {
-  const { jsPDF } = window.jspdf;
+  {/* Botão para gerar PDF com estilo do botão do formulário online */}
+  <a
+    onClick={() => {
+      const { jsPDF } = window.jspdf;
 
-  let conteudo = relatorioRef.current?.innerText || "";
+      let conteudo = relatorioRef.current?.innerText || "";
 
-  if (!conteudo.trim()) {
-    alert("Cole a análise do IA antes de gerar o PDF!");
-    return;
-  }
-
-  // =========================
-  // NORMALIZAÇÃO DE CARACTERES
-  // =========================
-  conteudo = conteudo
-    .replace(/→/g, "->")
-    .replace(/“|”/g, '"')
-    .replace(/’/g, "'")
-    .replace(/—/g, "-")
-    .replace(/–/g, "-")
-    .replace(/\u2011/g, "-")   // non-breaking hyphen
-    .replace(/\u00A0/g, " ");  // non-breaking space
-
-  const pdf = new jsPDF("p", "pt", "a4");
-
-  const margem = 50;
-  const larguraPagina = pdf.internal.pageSize.getWidth();
-  const alturaPagina = pdf.internal.pageSize.getHeight();
-  const larguraTexto = larguraPagina - margem * 2;
-
-  let y = 100;
-  let primeiroAuto = true;
-
-  // =========================
-  // CABEÇALHO
-  // =========================
-  pdf.setFont("helvetica", "bold");
-  pdf.setFontSize(16);
-
-  pdf.text(
-    "RELATÓRIO DE ERROS – AUTOS DE NOTÍCIA",
-    larguraPagina / 2,
-    60,
-    { align: "center" }
-  );
-
-  pdf.setFontSize(10);
-  pdf.setFont("helvetica", "normal");
-
-  pdf.text(
-    `Data: ${new Date().toLocaleString()}`,
-    larguraPagina - margem,
-    75,
-    { align: "right" }
-  );
-
-  pdf.setDrawColor(200);
-  pdf.setLineWidth(1);
-  pdf.line(margem, 85, larguraPagina - margem, 85);
-
-  // =========================
-  // CORPO
-  // =========================
-  const linhas = conteudo.split("\n");
-
-  linhas.forEach((linha) => {
-    const texto = linha.trim();
-
-    if (!texto) {
-      y += 10;
-      return;
-    }
-
-    if (y > alturaPagina - 60) {
-      pdf.addPage();
-      y = 60;
-    }
-
-    // Detecta AUTO X
-    if (/^AUTO\s+\d+/i.test(texto)) {
-
-      if (!primeiroAuto) {
-        y += 15;
-        pdf.setDrawColor(180);
-        pdf.setLineWidth(0.8);
-        pdf.line(margem, y, larguraPagina - margem, y);
-        y += 25;
-      } else {
-        y += 20;
-        primeiroAuto = false;
+      if (!conteudo.trim()) {
+        alert("Cole a análise do IA antes de gerar o PDF!");
+        return;
       }
 
+      // Normalização de caracteres
+      conteudo = conteudo
+        .replace(/→/g, "->")
+        .replace(/“|”/g, '"')
+        .replace(/’/g, "'")
+        .replace(/—/g, "-")
+        .replace(/–/g, "-")
+        .replace(/\u2011/g, "-")
+        .replace(/\u00A0/g, " ");
+
+      const pdf = new jsPDF("p", "pt", "a4");
+      const margem = 50;
+      const larguraPagina = pdf.internal.pageSize.getWidth();
+      const alturaPagina = pdf.internal.pageSize.getHeight();
+      const larguraTexto = larguraPagina - margem * 2;
+
+      let y = 100;
+      let primeiroAuto = true;
+
+      // Cabeçalho
       pdf.setFont("helvetica", "bold");
-      pdf.setFontSize(14);
-      pdf.text(texto.toUpperCase(), margem, y);
-
-      y += 20;
-      return;
-    }
-
-    // Detecta linhas que começam com ponto
-    if (texto.startsWith(".")) {
-      pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(12);
-
-      const textoLimpo = texto.substring(1).trim();
-
-      const linhasQuebradas = pdf.splitTextToSize(
-        "• " + textoLimpo,
-        larguraTexto
+      pdf.setFontSize(16);
+      pdf.text(
+        "RELATÓRIO DE ERROS – AUTOS DE NOTÍCIA",
+        larguraPagina / 2,
+        60,
+        { align: "center" }
       );
 
-      linhasQuebradas.forEach((l) => {
+      pdf.setFontSize(10);
+      pdf.setFont("helvetica", "normal");
+      pdf.text(
+        `Data: ${new Date().toLocaleString()}`,
+        larguraPagina - margem,
+        75,
+        { align: "right" }
+      );
+
+      pdf.setDrawColor(200);
+      pdf.setLineWidth(1);
+      pdf.line(margem, 85, larguraPagina - margem, 85);
+
+      // Corpo
+      const linhas = conteudo.split("\n");
+
+      linhas.forEach((linha) => {
+        const texto = linha.trim();
+
+        if (!texto) {
+          y += 10;
+          return;
+        }
+
         if (y > alturaPagina - 60) {
           pdf.addPage();
           y = 60;
         }
 
-        pdf.text(l, margem, y);
-        y += 18;
+        // Detecta AUTO X
+        if (/^AUTO\s+\d+/i.test(texto)) {
+          if (!primeiroAuto) {
+            y += 15;
+            pdf.setDrawColor(180);
+            pdf.setLineWidth(0.8);
+            pdf.line(margem, y, larguraPagina - margem, y);
+            y += 25;
+          } else {
+            y += 20;
+            primeiroAuto = false;
+          }
+
+          pdf.setFont("helvetica", "bold");
+          pdf.setFontSize(14);
+          pdf.text(texto.toUpperCase(), margem, y);
+          y += 20;
+          return;
+        }
+
+        // Detecta linhas que começam com ponto
+        if (texto.startsWith(".")) {
+          pdf.setFont("helvetica", "normal");
+          pdf.setFontSize(12);
+
+          const textoLimpo = texto.substring(1).trim();
+          const linhasQuebradas = pdf.splitTextToSize("• " + textoLimpo, larguraTexto);
+
+          linhasQuebradas.forEach((l) => {
+            if (y > alturaPagina - 60) {
+              pdf.addPage();
+              y = 60;
+            }
+            pdf.text(l, margem, y);
+            y += 18;
+          });
+
+          return;
+        }
+
+        // Texto normal
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(12);
+        const linhasQuebradas = pdf.splitTextToSize(texto, larguraTexto);
+
+        linhasQuebradas.forEach((l) => {
+          if (y > alturaPagina - 60) {
+            pdf.addPage();
+            y = 60;
+          }
+          pdf.text(l, margem, y);
+          y += 18;
+        });
       });
 
-      return;
-    }
-
-    // Texto normal
-    pdf.setFont("helvetica", "normal");
-    pdf.setFontSize(12);
-
-    const linhasQuebradas = pdf.splitTextToSize(texto, larguraTexto);
-
-    linhasQuebradas.forEach((l) => {
-      if (y > alturaPagina - 60) {
-        pdf.addPage();
-        y = 60;
+      // Rodapé
+      const totalPaginas = pdf.getNumberOfPages();
+      for (let i = 1; i <= totalPaginas; i++) {
+        pdf.setPage(i);
+        pdf.setFontSize(9);
+        pdf.setTextColor(150);
+        pdf.text(`Página ${i} de ${totalPaginas}`, larguraPagina / 2, alturaPagina - 20, { align: "center" });
       }
 
-      pdf.text(l, margem, y);
-      y += 18;
-    });
-  });
-
-  // =========================
-  // RODAPÉ
-  // =========================
-  const totalPaginas = pdf.getNumberOfPages();
-
-  for (let i = 1; i <= totalPaginas; i++) {
-    pdf.setPage(i);
-    pdf.setFontSize(9);
-    pdf.setTextColor(150);
-
-    pdf.text(
-      `Página ${i} de ${totalPaginas}`,
-      larguraPagina / 2,
-      alturaPagina - 20,
-      { align: "center" }
-    );
-  }
-
-  pdf.save("relatorio.pdf");
-}}
-    className="flex items-center gap-3 text-blue-600 font-bold border-2 border-blue-600 px-6 py-3 rounded-lg hover:bg-blue-600 hover:text-white transition-colors"
+      pdf.save("relatorio.pdf");
+    }}
+    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-10 rounded-lg shadow-md transition-all transform hover:-translate-y-1 cursor-pointer"
   >
-    <FileText size={20} />
+    <FileText size={18} />
     Descarregar PDF
-  </button>
+  </a>
 </Section>
          {/* 6. Vídeo Explicativo */}
 <Section id="video" title="Vídeo Explicativo" icon={<Video size={28} />}>
