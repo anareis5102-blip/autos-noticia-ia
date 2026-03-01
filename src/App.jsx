@@ -222,19 +222,70 @@ const App = () => {
     className="p-6 mb-6 bg-white border border-slate-200 rounded-lg min-h-[200px] text-slate-700 whitespace-pre-wrap"
     placeholder="Cole aqui a análise do Agente IA..."
   ></div>
-
   {/* Botão para gerar PDF centralizado */}
-  <div className="flex justify-center">
-    <a
-      onClick={() => {
-        // ... lógica completa do PDF aqui ...
-      }}
-      className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-10 rounded-lg shadow-md transition-all transform hover:-translate-y-1 cursor-pointer"
-    >
-      <FileText size={18} />
-      Descarregar PDF
-    </a>
-  </div>
+<div className="flex justify-center">
+  <button
+    onClick={() => {
+      const { jsPDF } = window.jspdf;
+
+      let conteudo = relatorioRef.current?.innerText || "";
+
+      if (!conteudo.trim()) {
+        alert("Cole a análise do IA antes de gerar o PDF!");
+        return;
+      }
+
+      // Normalização de caracteres
+      conteudo = conteudo
+        .replace(/→/g, "->")
+        .replace(/“|”/g, '"')
+        .replace(/’/g, "'")
+        .replace(/—/g, "-")
+        .replace(/–/g, "-")
+        .replace(/\u2011/g, "-")   // non-breaking hyphen
+        .replace(/\u00A0/g, " ");  // non-breaking space
+
+      const pdf = new jsPDF("p", "pt", "a4");
+      const margem = 50;
+      const larguraPagina = pdf.internal.pageSize.getWidth();
+      const alturaPagina = pdf.internal.pageSize.getHeight();
+      const larguraTexto = larguraPagina - margem * 2;
+
+      let y = 100;
+      let primeiroAuto = true;
+
+      // Cabeçalho
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(16);
+      pdf.text(
+        "RELATÓRIO DE ERROS – AUTOS DE NOTÍCIA",
+        larguraPagina / 2,
+        60,
+        { align: "center" }
+      );
+
+      pdf.setFontSize(10);
+      pdf.setFont("helvetica", "normal");
+      pdf.text(
+        `Data: ${new Date().toLocaleString()}`,
+        larguraPagina - margem,
+        75,
+        { align: "right" }
+      );
+
+      pdf.setDrawColor(200);
+      pdf.setLineWidth(1);
+      pdf.line(margem, 85, larguraPagina - margem, 85);
+
+      // Corpo e rodapé do PDF
+      // ... mantém toda a lógica atual ...
+    }}
+    className="block text-center items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-10 rounded-lg shadow-md transition-all transform hover:-translate-y-1"
+  >
+    <FileText size={18} />
+    Descarregar PDF
+  </button>
+</div>
 </Section>
   {/* Botão para gerar PDF com estilo do botão do formulário online */}
   <a
